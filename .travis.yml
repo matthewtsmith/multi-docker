@@ -3,21 +3,21 @@ services:
   - docker
 
 before_install:
-  - docker build -t apptreesoftware/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t apptree/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run apptreesoftware/react-test npm test -- --coverage
+  - docker run apptree/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t apptreesoftware/multi-client ./client
-  - docker build -t apptreesoftware/multi-server ./server
-  - docker build -t apptreesoftware/multi-nginx ./nginx
-  - docker build -t apptreesoftware/multi-worker ./worker
+  - docker build -t apptree/multi-client ./client
+  - docker build -t apptree/multi-server ./server
+  - docker build -t apptree/multi-nginx ./nginx
+  - docker build -t apptree/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push matthewtsmith/multi-client
-  - docker push matthewtsmith/multi-server
-  - docker push matthewtsmith/multi-nginx
-  - docker push matthewtsmith/multi-worker
+  - docker push apptree/multi-client
+  - docker push apptree/multi-server
+  - docker push apptree/multi-nginx
+  - docker push apptree/multi-worker
 # Log in to the docker CLI
 
 
