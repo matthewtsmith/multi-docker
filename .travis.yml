@@ -3,16 +3,16 @@ services:
   - docker
 
 before_install:
-  - docker build -t matthewtsmith/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t apptreesoftware/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run matthewtsmith/react-test npm test -- --coverage
+  - docker run apptreesoftware/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t matthewtsmith/multi-client ./client
-  - docker build -t matthewtsmith/multi-server ./server
-  - docker build -t matthewtsmith/multi-nginx ./nginx
-  - docker build -t matthewtsmith/multi-worker ./worker
+  - docker build -t apptreesoftware/multi-client ./client
+  - docker build -t apptreesoftware/multi-server ./server
+  - docker build -t apptreesoftware/multi-nginx ./nginx
+  - docker build -t apptreesoftware/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push matthewtsmith/multi-client
   - docker push matthewtsmith/multi-server
